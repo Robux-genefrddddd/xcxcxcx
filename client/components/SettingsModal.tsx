@@ -156,13 +156,13 @@ export function SettingsModal({ isOpen, onOpenChange }: SettingsModalProps) {
                   onChange={handleDisplayNameChange}
                   placeholder="Votre pseudo..."
                   maxLength={10}
-                  className="w-full bg-white/[0.02] border border-white/[0.08] rounded-[12px] px-4 py-3 text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all duration-200 text-sm"
+                  className="w-full bg-white/[0.03] border border-white/[0.06] rounded-[10px] px-3 py-2.5 text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/40 focus:bg-white/[0.05] transition-all duration-200 text-sm"
                 />
-                <div className="flex items-center justify-between">
-                  <p className="text-xs text-foreground/60">
-                    Modifiez votre nom d'utilisateur
+                <div className="flex items-center justify-between px-0.5">
+                  <p className="text-xs text-foreground/50">
+                    Max 10 caractères
                   </p>
-                  <span className="text-xs text-foreground/50 font-medium">
+                  <span className="text-xs text-foreground/40">
                     {displayName.length}/10
                   </span>
                 </div>
