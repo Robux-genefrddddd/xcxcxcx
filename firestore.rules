@@ -16,10 +16,6 @@ service cloud.firestore {
       return isAuth() && request.auth.uid == userId;
     }
 
-    function userExists(userId) {
-      return exists(/databases/$(database)/documents/users/$(userId));
-    }
-
     // --- USERS ---
     match /users/{userId} {
       allow read: if isAuth();
@@ -37,31 +33,18 @@ service cloud.firestore {
 
     // --- CONVERSATIONS ---
     match /conversations/{conversationId} {
-      // READ / UPDATE / DELETE → vérifier propriétaire
-      allow read, update, delete: if isAuth()
-        && resource.data.userId == request.auth.uid;
-
-      // CREATE → vérifier via request.resource.data
-      allow create: if isAuth()
-        && request.resource.data.userId == request.auth.uid;
+      allow read: if isAuth() && resource.data.userId == request.auth.uid;
+      allow create: if isAuth();
+      allow update: if isAuth() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuth() && resource.data.userId == request.auth.uid;
     }
 
     // --- MESSAGES ---
     match /messages/{messageId} {
-      // READ: conversation doit exister et appartenir à l'utilisateur
-      allow read: if isAuth()
-        && exists(/databases/$(database)/documents/conversations/$(resource.data.conversationId))
-        && get(/databases/$(database)/documents/conversations/$(resource.data.conversationId)).data.userId == request.auth.uid;
-
-      // CREATE: vérifier userId et que la conversation existe et appartient à l'utilisateur
-      allow create: if isAuth()
-        && request.resource.data.userId == request.auth.uid
-        && exists(/databases/$(database)/documents/conversations/$(request.resource.data.conversationId))
-        && get(/databases/$(database)/documents/conversations/$(request.resource.data.conversationId)).data.userId == request.auth.uid;
-
-      // UPDATE / DELETE → propriétaire du message
-      allow update, delete: if isAuth()
-        && resource.data.userId == request.auth.uid;
+      allow read: if isAuth();
+      allow create: if isAuth();
+      allow update: if isAuth() && resource.data.userId == request.auth.uid;
+      allow delete: if isAuth() && resource.data.userId == request.auth.uid;
     }
 
     // --- USER IPs ---
