@@ -213,15 +213,18 @@ export function Sidebar({
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 w-48 sm:w-52 bg-sidebar border-r border-white/[0.08] flex flex-col transition-transform duration-300 ${
+        className={`fixed inset-y-0 left-0 w-44 sm:w-48 bg-sidebar border-r border-white/[0.08] flex flex-col transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } z-50 animate-slideInLeft`}
       >
         {/* Header - Minimal */}
-        <div className="p-3 sm:p-3 animate-fadeIn border-b border-white/[0.08]">
+        <div className="pt-5 px-3 pb-3 animate-fadeIn border-b border-white/[0.08]">
           <div className="flex items-center gap-2.5 justify-between mb-2.5">
-            <div className="flex items-center gap-2 min-w-0 flex-1">
-              <div className="w-7 h-7 bg-gradient-to-br from-primary/80 to-primary rounded-lg flex items-center justify-center text-primary-foreground text-xs font-semibold flex-shrink-0 shadow-md hover-lift">
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              className="flex items-center gap-2 min-w-0 flex-1 hover:opacity-80 transition-opacity rounded-lg p-1 -m-1"
+            >
+              <div className="w-8 h-8 bg-gradient-to-br from-primary/80 to-primary rounded-full flex items-center justify-center text-primary-foreground text-xs font-semibold flex-shrink-0 shadow-md border border-primary/30 hover-lift">
                 {userInitial}
               </div>
               <div className="hidden sm:block min-w-0 flex-1">
@@ -232,11 +235,11 @@ export function Sidebar({
                   {loading ? "..." : userData?.email?.split("@")[0] || "Pro"}
                 </p>
               </div>
-            </div>
-            <div className="flex items-center gap-1.5">
+            </button>
+            <div className="flex items-center gap-1">
               <button
                 onClick={onClose}
-                className="p-1.5 hover:bg-white/10 rounded-lg transition-all text-muted-foreground hover:text-foreground flex-shrink-0"
+                className="p-1.5 hover:bg-white/[0.08] rounded-lg transition-all text-foreground/60 hover:text-foreground flex-shrink-0 hover:-translate-y-0.5"
                 aria-label="Close"
                 title="Close"
               >
@@ -244,39 +247,39 @@ export function Sidebar({
               </button>
               <Popover open={isMenuOpen} onOpenChange={setIsMenuOpen}>
                 <PopoverTrigger asChild>
-                  <button className="p-1.5 hover:bg-white/10 rounded-lg transition-all text-muted-foreground hover:text-foreground flex-shrink-0">
-                    <MoreVertical size={14} />
+                  <button className="p-1.5 hover:bg-white/[0.08] rounded-lg transition-all text-foreground/60 hover:text-foreground flex-shrink-0 hover:-translate-y-0.5">
+                    <MoreVertical size={16} />
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className="w-36 p-2 bg-card border border-white/[0.1] rounded-lg">
-                  <div className="space-y-1">
+                <PopoverContent className="w-40 p-1 bg-card border border-white/[0.1] rounded-lg shadow-lg">
+                  <div className="space-y-0.5">
                     <button
                       onClick={() => {
                         setIsSettingsOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className="w-full text-left px-2.5 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs text-foreground/70 hover:text-foreground hover:bg-white/[0.08] transition-colors hover:-translate-y-0.5"
                     >
-                      Settings
+                      Paramètres
                     </button>
                     <button
                       onClick={() => {
                         setIsHelpOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className="w-full text-left px-2.5 py-2 rounded-lg text-xs text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
+                      className="w-full text-left px-3 py-2 rounded-lg text-xs text-foreground/70 hover:text-foreground hover:bg-white/[0.08] transition-colors hover:-translate-y-0.5"
                     >
-                      Help
+                      Aide
                     </button>
                     {userData?.isAdmin && (
                       <>
-                        <div className="h-px bg-white/[0.08] my-1" />
+                        <div className="h-px bg-white/[0.08] my-0.5" />
                         <button
                           onClick={() => {
                             navigate("/admin");
                             setIsMenuOpen(false);
                           }}
-                          className="w-full text-left px-2.5 py-2 rounded-lg text-xs text-primary font-medium hover:bg-white/10 transition-colors"
+                          className="w-full text-left px-3 py-2 rounded-lg text-xs text-primary font-medium hover:bg-white/[0.08] transition-colors hover:-translate-y-0.5"
                         >
                           Admin
                         </button>
@@ -294,22 +297,25 @@ export function Sidebar({
 
         {/* New Conversation Button */}
         <div
-          className="px-3 py-3 animate-fadeIn"
+          className="px-3 py-4 animate-fadeIn"
           style={{ animationDelay: "0.1s" }}
         >
           <button
             id="new-conversation-btn"
             onClick={handleNewConversation}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 bg-primary/20 hover:bg-primary/30 text-primary font-medium text-xs rounded-lg transition-all duration-200 hover-lift"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-primary/20 hover:bg-primary/30 text-primary font-medium text-xs rounded-lg transition-all duration-200 shadow-sm hover:shadow-md hover:opacity-95 hover:-translate-y-px active:scale-95"
           >
-            <Plus size={14} />
+            <Plus size={16} className="flex-shrink-0" />
             <span>New</span>
           </button>
         </div>
 
         {/* Conversations List */}
-        <div id="conversations-list" className="flex-1 overflow-y-auto p-3">
-          <div className="space-y-1.5">
+        <div
+          id="conversations-list"
+          className="flex-1 overflow-y-auto px-3 py-2"
+        >
+          <div className="space-y-2">
             {conversations.map((conv, idx) => (
               <div
                 key={conv.id}
@@ -323,17 +329,17 @@ export function Sidebar({
                 }}
               >
                 <div
-                  className={`flex items-center gap-2 px-2 py-2.5 rounded-lg transition-all border ${
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all border shadow-sm group-hover:-translate-y-px ${
                     conv.id === activeConversationId
-                      ? "bg-primary/15 border-primary/40 text-foreground"
-                      : "border-white/[0.08] hover:bg-white/[0.05] text-muted-foreground hover:text-foreground"
+                      ? "bg-primary/15 border-primary/50 text-foreground shadow-md"
+                      : "border-white/[0.08] hover:bg-white/[0.05] text-muted-foreground hover:text-foreground hover:shadow-md hover:border-primary/30"
                   }`}
                 >
                   <button
                     onClick={() => onConversationSelect?.(conv.id)}
-                    className={`flex-1 text-left text-sm transition-all py-1 px-2 rounded ${
+                    className={`flex-1 text-left text-xs transition-all py-1 px-1 rounded-lg truncate ${
                       conv.id === activeConversationId
-                        ? "text-foreground"
+                        ? "text-foreground font-medium"
                         : "text-foreground/70 hover:text-foreground"
                     }`}
                   >
@@ -342,14 +348,14 @@ export function Sidebar({
                   <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => handleEditConversation(conv.id, conv.name)}
-                      className="p-1 text-foreground/70 hover:text-foreground hover:bg-white/10 rounded transition-colors"
+                      className="p-1.5 text-foreground/60 hover:text-foreground hover:bg-white/10 rounded-lg transition-all hover:-translate-y-0.5"
                       title="Edit"
                     >
                       <Edit2 size={14} />
                     </button>
                     <button
                       onClick={() => handleDeleteConversation(conv.id)}
-                      className="p-1 text-foreground/70 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+                      className="p-1.5 text-foreground/60 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all hover:-translate-y-0.5"
                       title="Delete"
                     >
                       <Trash2 size={14} />
@@ -364,22 +370,33 @@ export function Sidebar({
         {/* Message Usage Section */}
         <div
           id="messages-counter"
-          className="px-4 py-4 border-t border-white/10 animate-fadeIn"
-          style={{ animationDelay: "0.25s" }}
+          className="px-3 py-2.5 border-t border-white/[0.08] animate-fadeIn bg-white/[0.02] rounded-[10px] shadow-sm"
+          style={{
+            animationDelay: "0.25s",
+            marginLeft: "20px",
+            marginTop: "16px",
+            marginBottom: "22px",
+            maxWidth: "calc(100% - 40px)",
+          }}
         >
-          <div className="flex items-center gap-2 mb-2 justify-between">
-            <span className="text-xs text-white/70 font-medium">Messages</span>
+          <div className="flex items-center gap-2 mb-2.5 justify-between">
+            <span className="text-xs text-foreground/70 font-medium">
+              Messages
+            </span>
             <button
               onClick={handleSyncMessages}
               disabled={isSyncing}
-              className="p-1 hover:bg-white/10 rounded transition-colors disabled:opacity-50"
+              className="p-1.5 hover:bg-white/10 rounded-lg transition-colors disabled:opacity-50 hover:-translate-y-0.5"
               title="Synchroniser"
             >
               {isSyncing ? (
-                <Loader2 size={14} className="animate-spin text-white/60" />
+                <Loader2
+                  size={14}
+                  className="animate-spin text-foreground/60"
+                />
               ) : (
                 <svg
-                  className="w-4 h-4 text-white/60 hover:text-white"
+                  className="w-4 h-4 text-foreground/60 hover:text-foreground transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -394,14 +411,14 @@ export function Sidebar({
               )}
             </button>
           </div>
-          <div className="space-y-1">
-            <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
+          <div className="space-y-1.5">
+            <div className="relative h-2 bg-white/[0.08] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-white/40 to-white/60 rounded-full transition-all"
+                className="h-full bg-gradient-to-r from-primary/60 to-primary/80 rounded-full transition-all shadow-sm"
                 style={{ width: `${(messagesUsed / messagesLimit) * 100}%` }}
               ></div>
             </div>
-            <p className="text-xs text-white/60">
+            <p className="text-xs text-foreground/60">
               {messagesLimit - messagesUsed} sur {messagesLimit} restants
             </p>
           </div>
@@ -409,12 +426,12 @@ export function Sidebar({
 
         {/* Footer - Sign Out */}
         <div
-          className="px-4 py-3 border-t border-white/10 animate-fadeIn"
+          className="px-3 py-4 border-t border-white/[0.08] animate-fadeIn"
           style={{ animationDelay: "0.3s" }}
         >
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 text-foreground/70 hover:text-foreground border-2 border-red-500/50 hover:border-red-500 hover:bg-red-500/10 transition-all text-xs font-medium rounded-lg hover:scale-105 transform"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 text-red-400/80 hover:text-red-400 border border-red-500/30 hover:border-red-500/50 hover:bg-red-500/10 transition-all text-xs font-medium rounded-lg hover:opacity-95 hover:-translate-y-px active:scale-95 shadow-sm hover:shadow-md"
           >
             <LogOut size={16} />
             <span>Se déconnecter</span>
@@ -424,9 +441,9 @@ export function Sidebar({
 
       {/* Edit Conversation Modal */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="bg-card border-2 border-white rounded-xl">
+        <DialogContent className="bg-card border border-white/[0.1] rounded-xl">
           <DialogHeader>
-            <DialogTitle className="text-foreground">
+            <DialogTitle className="text-foreground text-lg font-semibold">
               Modifier la Conversation
             </DialogTitle>
           </DialogHeader>
@@ -436,24 +453,25 @@ export function Sidebar({
               value={editName}
               onChange={(e) => setEditName(e.target.value)}
               placeholder="Nom de la conversation..."
-              className="w-full bg-background border border-white/30 rounded-lg px-4 py-2 text-foreground placeholder-foreground/40 focus:outline-none focus:border-white transition-colors"
+              className="w-full bg-white/[0.02] border border-white/[0.1] rounded-lg px-4 py-2.5 text-foreground placeholder-foreground/40 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-colors text-sm"
               onKeyPress={(e) => {
                 if (e.key === "Enter") {
                   handleSaveEdit();
                 }
               }}
+              autoFocus
             />
           </div>
-          <DialogFooter>
+          <DialogFooter className="gap-2">
             <button
               onClick={() => setIsDialogOpen(false)}
-              className="px-4 py-2 text-foreground/70 border border-white/30 rounded-lg hover:bg-white/5 transition-colors"
+              className="px-4 py-2.5 text-foreground/70 border border-white/[0.1] rounded-lg hover:bg-white/[0.05] transition-colors text-sm font-medium hover:-translate-y-0.5"
             >
               Annuler
             </button>
             <button
               onClick={handleSaveEdit}
-              className="px-4 py-2 bg-white/20 text-foreground border border-white rounded-lg hover:bg-white/30 transition-colors font-medium"
+              className="px-4 py-2.5 bg-primary/20 text-primary border border-primary/30 rounded-lg hover:bg-primary/30 transition-colors font-medium text-sm hover:-translate-y-0.5"
             >
               Enregistrer
             </button>

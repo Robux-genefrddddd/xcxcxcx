@@ -111,14 +111,11 @@ export function ProfilePhotoUpload({
   };
 
   return (
-    <div className="space-y-3">
-      <label className="block text-sm font-medium text-white/80">
-        Photo de profil
-      </label>
-      <div className="flex items-end gap-4">
+    <div className="space-y-2.5">
+      <div className="flex items-end gap-3">
         {/* Photo Preview */}
         <div className="relative">
-          <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/20 bg-gradient-to-br from-blue-500/50 to-blue-600/50 flex items-center justify-center flex-shrink-0">
+          <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary/30 bg-gradient-to-br from-primary/40 to-primary/50 flex items-center justify-center flex-shrink-0">
             {preview ? (
               <img
                 src={preview}
@@ -161,22 +158,22 @@ export function ProfilePhotoUpload({
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading || loading}
-            className="w-full px-4 py-2.5 rounded-lg border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 font-medium text-sm"
+            className="w-full px-3 py-2 rounded-[10px] border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.03] hover:bg-white/[0.06] text-foreground/80 hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 font-medium text-xs"
           >
             {uploading ? (
               <>
-                <Loader2 size={16} className="animate-spin" />
-                Téléchargement...
+                <Loader2 size={14} className="animate-spin" />
+                <span className="hidden sm:inline">Téléchargement...</span>
               </>
             ) : preview ? (
               <>
-                <Upload size={16} />
-                Changer
+                <Upload size={14} />
+                <span>Changer</span>
               </>
             ) : (
               <>
-                <Upload size={16} />
-                Télécharger
+                <Upload size={14} />
+                <span>Télécharger</span>
               </>
             )}
           </button>
@@ -189,7 +186,7 @@ export function ProfilePhotoUpload({
             className="hidden"
             aria-label="Sélectionner une photo de profil"
           />
-          <p className="text-xs text-white/50 mt-2">Max 5MB • JPG, PNG, WebP</p>
+          <p className="text-xs text-foreground/40 mt-1.5">Max 5MB</p>
         </div>
       </div>
     </div>
