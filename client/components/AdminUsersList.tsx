@@ -49,11 +49,32 @@ export default function AdminUsersList({
 
   const loadUsers = async () => {
     try {
-      const usersRef = collection(db, "users");
-      const snapshot = await getDocs(usersRef);
-      const usersList = snapshot.docs
-        .map((doc) => doc.data() as UserData)
-        .filter((user) => user && user.uid);
+      // Get the current user's ID token
+      const auth = (await import("firebase/auth")).getAuth();
+      const user = auth.currentUser;
+
+      if (!user) {
+        throw new Error("Not authenticated");
+      }
+
+      const idToken = await user.getIdToken();
+
+      // Call the backend API to get all users
+      const response = await fetch("/api/admin/users", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${idToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Erreur lors du chargement des utilisateurs");
+      }
+
+      const data = await response.json();
+      const usersList = data.users as UserData[];
 
       // Load IP information for each user
       const ipsMap: Record<string, UserIP[]> = {};
@@ -66,6 +87,7 @@ export default function AdminUsersList({
       setUserIPs(ipsMap);
       setUsers(usersList);
     } catch (error) {
+      console.error("Error loading users:", error);
       toast.error("Erreur lors du chargement des utilisateurs");
     } finally {
       setLoading(false);
