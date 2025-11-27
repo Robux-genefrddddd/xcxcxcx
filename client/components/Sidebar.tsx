@@ -213,20 +213,20 @@ export function Sidebar({
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 w-64 bg-sidebar border-r-2 border-white/20 flex flex-col transition-transform duration-300 ${
+        className={`fixed inset-y-0 left-0 w-56 sm:w-64 bg-sidebar border-r-2 border-white/20 flex flex-col transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } z-50 animate-slideInLeft`}
+        } z-50 animate-slideInLeft shadow-2xl shadow-black/50`}
       >
         {/* Header - Minimal */}
-        <div className="p-4 animate-fadeIn">
-          <div className="flex items-center gap-3 mb-2 justify-between">
+        <div className="p-3 sm:p-4 animate-fadeIn">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2 justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-foreground rounded-full flex items-center justify-center text-background text-sm font-bold border-2 border-white hover:scale-110 transition-transform">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-foreground rounded-full flex items-center justify-center text-background text-xs sm:text-sm font-bold border-2 border-white hover:scale-110 transition-transform flex-shrink-0">
                 {userInitial}
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-semibold text-foreground">
+              <div className="hidden sm:block min-w-0">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <p className="text-xs sm:text-sm font-semibold text-foreground truncate">
                     {loading ? "..." : userData?.displayName || "Utilisateur"}
                   </p>
                   {userData?.isAdmin && (
@@ -292,7 +292,7 @@ export function Sidebar({
             </Popover>
             </div>
           </div>
-          <p className="text-xs text-foreground/50 truncate">
+          <p className="text-xs text-foreground/50 truncate hidden sm:block">
             {loading ? "..." : userData?.email}
           </p>
         </div>
