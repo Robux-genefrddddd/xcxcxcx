@@ -68,6 +68,7 @@ function AuthPages() {
 function AppRoutes() {
   const navigate = useNavigate();
   const { userData } = useAuth();
+  const { showTOS, acceptTOS } = useTOS();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -87,30 +88,42 @@ function AppRoutes() {
   }, [navigate, userData?.isAdmin]);
 
   return (
-    <Routes>
-      <Route
-        path="/login"
-        element={
-          <>
-            <AuthPages />
-            <Login />
-          </>
-        }
+    <>
+      <TOSModal
+        isOpen={showTOS}
+        onAccept={() => {
+          acceptTOS();
+          toast.success("Conditions d'utilisation acceptées!");
+        }}
+        onReject={() => {
+          toast.info("Vous devez accepter les conditions pour continuer");
+        }}
       />
-      <Route
-        path="/register"
-        element={
-          <>
-            <AuthPages />
-            <Register />
-          </>
-        }
-      />
-      <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
-      <Route path="/" element={<ProtectedRoute element={<Index />} />} />
-      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <>
+              <AuthPages />
+              <Login />
+            </>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <>
+              <AuthPages />
+              <Register />
+            </>
+          }
+        />
+        <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
+        <Route path="/" element={<ProtectedRoute element={<Index />} />} />
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 
