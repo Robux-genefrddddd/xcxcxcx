@@ -190,9 +190,7 @@ export default function AdminBanManagement({ users }: AdminBanManagementProps) {
   }, [bans, filterType, showExpired, userSearchQuery]);
 
   const filteredIPBans = useMemo(() => {
-    return ipBans.filter((ban) =>
-      ban.ipAddress.includes(ipSearchQuery),
-    );
+    return ipBans.filter((ban) => ban.ipAddress.includes(ipSearchQuery));
   }, [ipBans, ipSearchQuery]);
 
   const isExpired = (ban: UserBan) => {
@@ -479,11 +477,7 @@ export default function AdminBanManagement({ users }: AdminBanManagementProps) {
                   : "bg-white/5 border-white/10 text-gray-400 hover:bg-white/10"
               }`}
             >
-              {showExpired ? (
-                <Eye size={16} />
-              ) : (
-                <EyeOff size={16} />
-              )}
+              {showExpired ? <Eye size={16} /> : <EyeOff size={16} />}
               Expirés
             </button>
           </div>
@@ -552,9 +546,9 @@ export default function AdminBanManagement({ users }: AdminBanManagementProps) {
                         {ban.isPermanent
                           ? "Permanent"
                           : ban.expiresAt
-                            ? new Date(ban.expiresAt.toDate()).toLocaleDateString(
-                                "fr-FR",
-                              )
+                            ? new Date(
+                                ban.expiresAt.toDate(),
+                              ).toLocaleDateString("fr-FR")
                             : "-"}
                       </td>
                       <td className="px-6 py-4">

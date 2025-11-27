@@ -321,7 +321,9 @@ export default function Admin() {
         <div className="relative z-10 text-center">
           <AlertCircle size={48} className="mx-auto text-red-500 mb-4" />
           <h1 className="text-2xl font-bold text-white mb-2">Accès refusé</h1>
-          <p className="text-gray-400 mb-6">Vous n'avez pas les permissions administrateur</p>
+          <p className="text-gray-400 mb-6">
+            Vous n'avez pas les permissions administrateur
+          </p>
           <button
             onClick={() => navigate("/")}
             className="flex items-center gap-2 mx-auto px-6 py-3 rounded-2xl font-semibold text-white"
@@ -373,7 +375,9 @@ export default function Admin() {
               </button>
               <div>
                 <h1 className="text-2xl font-bold text-white">Panneau Admin</h1>
-                <p className="text-xs text-gray-500">Gestion complète de la plateforme</p>
+                <p className="text-xs text-gray-500">
+                  Gestion complète de la plateforme
+                </p>
               </div>
             </div>
 
@@ -430,8 +434,12 @@ export default function Admin() {
         {activeTab === "users" && (
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl font-bold text-white mb-2">Gestion des utilisateurs</h2>
-              <p className="text-gray-400 text-sm">Gérez les comptes utilisateurs et les permissions</p>
+              <h2 className="text-xl font-bold text-white mb-2">
+                Gestion des utilisateurs
+              </h2>
+              <p className="text-gray-400 text-sm">
+                Gérez les comptes utilisateurs et les permissions
+              </p>
             </div>
             <AdminUsersList
               onBanUser={(email) => {
@@ -452,24 +460,31 @@ export default function Admin() {
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-white mb-2">Clés de licence</h2>
-                <p className="text-gray-400 text-sm">Générez et gérez les clés d'accès premium</p>
+                <h2 className="text-xl font-bold text-white mb-2">
+                  Clés de licence
+                </h2>
+                <p className="text-gray-400 text-sm">
+                  Générez et gérez les clés d'accès premium
+                </p>
               </div>
               <button
                 onClick={() => setShowGenerateLicenseModal(true)}
                 className="flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold text-sm transition-all duration-200"
                 style={{
-                  background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
+                  background:
+                    "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
                   color: "white",
                   boxShadow: "0 8px 16px rgba(59, 130, 246, 0.3)",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 12px 20px rgba(59, 130, 246, 0.4)";
+                  e.currentTarget.style.boxShadow =
+                    "0 12px 20px rgba(59, 130, 246, 0.4)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 8px 16px rgba(59, 130, 246, 0.3)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 16px rgba(59, 130, 246, 0.3)";
                 }}
               >
                 <Plus size={18} />
@@ -541,7 +556,9 @@ export default function Admin() {
                               </code>
                             </td>
                             <td className="px-6 py-4">
-                              <span className="text-gray-300 text-sm">{license.plan}</span>
+                              <span className="text-gray-300 text-sm">
+                                {license.plan}
+                              </span>
                             </td>
                             <td className="px-6 py-4">
                               <span
@@ -556,7 +573,9 @@ export default function Admin() {
                             </td>
                             <td className="px-6 py-4 text-gray-400 text-sm">
                               {license.expiresAt && !isNaN(license.expiresAt)
-                                ? new Date(license.expiresAt).toLocaleDateString()
+                                ? new Date(
+                                    license.expiresAt,
+                                  ).toLocaleDateString()
                                 : "-"}
                             </td>
                             <td className="px-6 py-4 text-gray-400 text-sm">
@@ -601,8 +620,12 @@ export default function Admin() {
           <div className="space-y-6">
             {/* Header */}
             <div>
-              <h2 className="text-xl font-bold text-white mb-2">Configuration IA</h2>
-              <p className="text-gray-400 text-sm">Paramétrez le modèle et le comportement de l'IA</p>
+              <h2 className="text-xl font-bold text-white mb-2">
+                Configuration IA
+              </h2>
+              <p className="text-gray-400 text-sm">
+                Paramétrez le modèle et le comportement de l'IA
+              </p>
             </div>
 
             {/* AI Config Cards */}
@@ -739,12 +762,14 @@ export default function Admin() {
                 onMouseEnter={(e) => {
                   if (!savingAiConfig) {
                     e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "0 12px 20px rgba(59, 130, 246, 0.4)";
+                    e.currentTarget.style.boxShadow =
+                      "0 12px 20px rgba(59, 130, 246, 0.4)";
                   }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 8px 16px rgba(59, 130, 246, 0.3)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 16px rgba(59, 130, 246, 0.3)";
                 }}
               >
                 <Save size={18} />
@@ -758,8 +783,12 @@ export default function Admin() {
           <div className="space-y-6">
             {/* Header */}
             <div>
-              <h2 className="text-xl font-bold text-white mb-2">Gestion système</h2>
-              <p className="text-gray-400 text-sm">Bans, maintenances et notifications globales</p>
+              <h2 className="text-xl font-bold text-white mb-2">
+                Gestion système
+              </h2>
+              <p className="text-gray-400 text-sm">
+                Bans, maintenances et notifications globales
+              </p>
             </div>
 
             <AdminBanManagement users={users} />
@@ -864,12 +893,15 @@ export default function Admin() {
                 {/* Active Maintenances */}
                 <div className="bg-white/[0.02] rounded-xl p-4 border border-white/10">
                   <h4 className="text-sm font-semibold text-white mb-4">
-                    Actives ({maintenanceNotices.filter((n) => n.isActive).length})
+                    Actives (
+                    {maintenanceNotices.filter((n) => n.isActive).length})
                   </h4>
                   <div className="space-y-3 max-h-80 overflow-y-auto">
                     {maintenanceNotices.filter((n) => n.isActive).length ===
                     0 ? (
-                      <p className="text-xs text-gray-500">Pas de maintenance</p>
+                      <p className="text-xs text-gray-500">
+                        Pas de maintenance
+                      </p>
                     ) : (
                       maintenanceNotices
                         .filter((n) => n.isActive)

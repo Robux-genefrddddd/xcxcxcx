@@ -19,7 +19,9 @@ export function TOSProvider({ children }: { children: ReactNode }) {
 
   // Check on mount if TOS was already accepted in this session
   useEffect(() => {
-    const tosAcceptedThisSession = sessionStorage.getItem("tos_accepted_session");
+    const tosAcceptedThisSession = sessionStorage.getItem(
+      "tos_accepted_session",
+    );
     if (!tosAcceptedThisSession) {
       setShowTOS(true);
     }

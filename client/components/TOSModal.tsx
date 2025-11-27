@@ -67,7 +67,9 @@ export default function TOSModal({
               <li>Diffuser des contenus illégaux ou offensants</li>
               <li>Contourner les systèmes de sécurité</li>
               <li>Usurper l'identité d'une autre personne</li>
-              <li>Utiliser la plateforme à des fins commerciales non autoris��es</li>
+              <li>
+                Utiliser la plateforme à des fins commerciales non autoris��es
+              </li>
             </ul>
           </section>
 
@@ -99,9 +101,9 @@ export default function TOSModal({
               5. Politique de confidentialité
             </h3>
             <p>
-              Nous collectons et traitons vos données personnelles conformément à
-              cette politique et à la réglementation en vigueur (RGPD, CCPA, etc.).
-              Les données que vous fournissez sont utilisées pour :
+              Nous collectons et traitons vos données personnelles conformément
+              à cette politique et à la réglementation en vigueur (RGPD, CCPA,
+              etc.). Les données que vous fournissez sont utilisées pour :
             </p>
             <ul className="list-disc list-inside mt-2 space-y-1 ml-2">
               <li>Fournir et améliorer nos services</li>
@@ -128,8 +130,8 @@ export default function TOSModal({
             </h3>
             <p>
               VanIA se réserve le droit de modifier ou interrompre le service à
-              tout moment. Nous vous notifierons des modifications importantes via
-              votre adresse email.
+              tout moment. Nous vous notifierons des modifications importantes
+              via votre adresse email.
             </p>
           </section>
 
@@ -165,7 +167,10 @@ export default function TOSModal({
               onChange={(e) => setIsAccepted(e.target.checked)}
               className="w-5 h-5 mt-1 rounded cursor-pointer accent-blue-500"
             />
-            <label htmlFor="tos-accept" className="text-sm text-gray-300 cursor-pointer flex-1">
+            <label
+              htmlFor="tos-accept"
+              className="text-sm text-gray-300 cursor-pointer flex-1"
+            >
               J'accepte les conditions d'utilisation et la politique de
               confidentialité
             </label>
