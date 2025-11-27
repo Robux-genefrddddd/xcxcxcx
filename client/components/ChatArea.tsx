@@ -59,6 +59,9 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
   const [generatingImage, setGeneratingImage] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Rate limiter: max 30 messages per minute
+  const messageRateLimiter = useRef(new RateLimiter("send_message", 30, 60000));
+
   useEffect(() => {
     if (conversationId && user?.uid) {
       loadMessages();
