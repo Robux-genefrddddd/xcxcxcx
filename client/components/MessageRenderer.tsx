@@ -125,8 +125,8 @@ function parseMarkdownElements(text: string, isDark: boolean): ReactNode[] {
       const content = headerMatch[2];
       const HeadingTag = `h${level}` as const;
       const headingClasses = {
-        h1: "text-3xl font-bold mb-4 mt-6 border-b border-white/20 pb-2",
-        h2: "text-2xl font-bold mb-3 mt-5 border-b border-white/10 pb-2",
+        h1: "text-3xl font-bold mb-4 mt-6 border-b pb-2",
+        h2: "text-2xl font-bold mb-3 mt-5 border-b pb-2",
         h3: "text-xl font-bold mb-2 mt-4",
         h4: "text-lg font-bold mb-2 mt-3",
         h5: "text-base font-bold mb-2 mt-2",
@@ -137,9 +137,13 @@ function parseMarkdownElements(text: string, isDark: boolean): ReactNode[] {
       elements.push(
         <HeadingElement
           key={`h-${i}`}
-          className={`text-white leading-[1.55] ${headingClasses[HeadingTag]}`}
+          className={`leading-[1.55] transition-all duration-300 ${
+            isDark
+              ? "text-white border-white/20"
+              : "text-[#1A1A1A] border-black/[0.08]"
+          } ${headingClasses[HeadingTag]}`}
         >
-          {parseInlineMarkdown(content)}
+          {parseInlineMarkdown(content, isDark)}
         </HeadingElement>,
       );
       i++;
