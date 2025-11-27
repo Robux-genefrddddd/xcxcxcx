@@ -526,13 +526,25 @@ export function Sidebar({
             </button>
           </div>
           <div className="space-y-1.5">
-            <div className="relative h-2 bg-white/[0.08] rounded-full overflow-hidden">
+            <div
+              className={`relative h-2 rounded-full overflow-hidden transition-colors duration-300 ${
+                isDark
+                  ? "bg-white/[0.08]"
+                  : "bg-black/[0.08]"
+              }`}
+            >
               <div
                 className="h-full bg-gradient-to-r from-primary/60 to-primary/80 rounded-full transition-all shadow-sm"
                 style={{ width: `${(messagesUsed / messagesLimit) * 100}%` }}
               ></div>
             </div>
-            <p className="text-xs text-foreground/60">
+            <p
+              className={`text-xs transition-colors duration-300 ${
+                isDark
+                  ? "text-foreground/60"
+                  : "text-[#3F3F3F]/60"
+              }`}
+            >
               {messagesLimit - messagesUsed} sur {messagesLimit} restants
             </p>
           </div>
