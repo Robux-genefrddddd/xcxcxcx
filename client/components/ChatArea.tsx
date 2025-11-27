@@ -245,6 +245,23 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
       if (isImage) {
         // Generate image
         assistantContent = await generateImage(userMessageText);
+        // Add assistant response immediately for images
+        const assistantMsg: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          role: "assistant",
+          content: assistantContent,
+          timestamp: Date.now(),
+        };
+        setChatMessages((prev) => [...prev, assistantMsg]);
+
+        // Save assistant message to Firebase
+        await MessagesService.addMessage(
+          conversationId,
+          user.uid,
+          `assistant:${assistantContent}`,
+        );
+
+        toast.success("Image générée avec succès!");
       } else {
         // Get AI response for normal chat
         const conversationHistory = chatMessages.map((msg) => ({
@@ -257,33 +274,25 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
           userMessageText,
           conversationHistory,
         );
+
+        // Add placeholder message with empty content
+        const assistantMsg: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          role: "assistant",
+          content: "", // Will be filled by typewriter effect
+          timestamp: Date.now(),
+        };
+        setChatMessages((prev) => [...prev, assistantMsg]);
+
+        // Start typewriter effect
+        startTypewriterEffect(assistantContent);
       }
-
-      // Add assistant response to chat
-      const assistantMsg: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: assistantContent,
-        timestamp: Date.now(),
-      };
-      setChatMessages((prev) => [...prev, assistantMsg]);
-
-      // Save assistant message to Firebase
-      await MessagesService.addMessage(
-        conversationId,
-        user.uid,
-        `assistant:${assistantContent}`,
-      );
 
       // Update message count in Firebase
       await MessagesService.updateUserMessageCount(
         user.uid,
         userData.messagesUsed + 1,
       );
-
-      if (isImage) {
-        toast.success("Image générée avec succès!");
-      }
     } catch (error) {
       console.error("Error sending message:", error);
       toast.error(
