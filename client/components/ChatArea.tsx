@@ -47,7 +47,6 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
   const [renderedBlockCount, setRenderedBlockCount] = useState(0);
   const [isRenderingBlocks, setIsRenderingBlocks] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const typingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const blockIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
