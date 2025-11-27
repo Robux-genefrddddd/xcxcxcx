@@ -117,47 +117,6 @@ export default function AdminBanManagement({ users }: AdminBanManagementProps) {
     }
   };
 
-  const handleBanIP = async () => {
-    if (!banIPAddress || !banIPReason) {
-      toast.error("Entrez une adresse IP et une raison");
-      return;
-    }
-
-    setSavingIPBan(true);
-    try {
-      await IPService.banIP(
-        banIPAddress,
-        banIPReason,
-        banIPDuration || undefined,
-      );
-      toast.success("Adresse IP bannie avec succès");
-
-      setBanIPAddress("");
-      setBanIPReason("");
-      setBanIPDuration(null);
-      await loadBans();
-    } catch (error) {
-      console.error("Error in handleBanIP:", error);
-      const errorMessage =
-        error instanceof Error ? error.message : "Erreur lors du ban IP";
-      toast.error(errorMessage);
-    } finally {
-      setSavingIPBan(false);
-    }
-  };
-
-  const handleUnbanIP = async (ipAddress: string) => {
-    try {
-      await IPService.unbanIP(ipAddress);
-      toast.success("Adresse IP débanni");
-      await loadBans();
-    } catch (error) {
-      console.error("Error in handleUnbanIP:", error);
-      const errorMessage =
-        error instanceof Error ? error.message : "Erreur lors du déban IP";
-      toast.error(errorMessage);
-    }
-  };
 
   // Filtered and searched bans
   const filteredUserBans = useMemo(() => {
