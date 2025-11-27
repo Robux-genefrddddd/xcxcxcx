@@ -733,22 +733,38 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
 
             {/* Image Generation Loading State */}
             {generatingImage && (
-              <div className="flex items-center gap-3 px-4 py-3 mt-3 rounded-lg bg-gradient-to-r from-purple-600/20 to-purple-500/10 border border-purple-500/40 animate-pulse">
+              <div
+                className={`flex items-center gap-3 px-4 py-3 mt-3 rounded-lg animate-pulse transition-all duration-300 ${
+                  isDark
+                    ? "bg-gradient-to-r from-purple-600/20 to-purple-500/10 border border-purple-500/40"
+                    : "bg-gradient-to-r from-purple-100/40 to-purple-50/40 border border-purple-300/40"
+                }`}
+              >
                 <div className="flex gap-1">
                   <div
-                    className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
+                    className={`w-2 h-2 rounded-full animate-bounce transition-colors duration-300 ${
+                      isDark ? "bg-purple-400" : "bg-purple-500"
+                    }`}
                     style={{ animationDelay: "0s" }}
                   />
                   <div
-                    className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
+                    className={`w-2 h-2 rounded-full animate-bounce transition-colors duration-300 ${
+                      isDark ? "bg-purple-400" : "bg-purple-500"
+                    }`}
                     style={{ animationDelay: "0.2s" }}
                   />
                   <div
-                    className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
+                    className={`w-2 h-2 rounded-full animate-bounce transition-colors duration-300 ${
+                      isDark ? "bg-purple-400" : "bg-purple-500"
+                    }`}
                     style={{ animationDelay: "0.4s" }}
                   />
                 </div>
-                <span className="text-sm text-purple-300 font-medium">
+                <span
+                  className={`text-sm font-medium transition-colors duration-300 ${
+                    isDark ? "text-purple-300" : "text-purple-700"
+                  }`}
+                >
                   Génération d'image en cours...
                 </span>
               </div>
