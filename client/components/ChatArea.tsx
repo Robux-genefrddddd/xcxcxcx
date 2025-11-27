@@ -157,36 +157,39 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
 
   // Handle saving message to Firebase when typing is complete
   useEffect(() => {
-    if (!isTyping && typingText && fullText && conversationId && user) {
-      const saveMessage = async () => {
-        try {
-          // Update the last message with the full typed text
-          setChatMessages((prev) => {
-            const updated = [...prev];
-            if (updated.length > 0 && updated[updated.length - 1].role === "assistant") {
-              updated[updated.length - 1].content = fullText;
-            }
-            return updated;
-          });
+    if (!isTyping && fullText && conversationId && user && chatMessages.length > 0) {
+      const lastMessage = chatMessages[chatMessages.length - 1];
+      if (lastMessage.role === "assistant" && lastMessage.content === "") {
+        const saveMessage = async () => {
+          try {
+            // Update the last message with the full typed text
+            setChatMessages((prev) => {
+              const updated = [...prev];
+              if (updated.length > 0 && updated[updated.length - 1].role === "assistant") {
+                updated[updated.length - 1].content = fullText;
+              }
+              return updated;
+            });
 
-          // Save to Firebase
-          await MessagesService.addMessage(
-            conversationId,
-            user.uid,
-            `assistant:${fullText}`,
-          );
+            // Save to Firebase
+            await MessagesService.addMessage(
+              conversationId,
+              user.uid,
+              `assistant:${fullText}`,
+            );
 
-          // Reset typing state
-          setTypingText("");
-          setFullText("");
-        } catch (error) {
-          console.error("Error saving message:", error);
-        }
-      };
+            // Reset typing state
+            setTypingText("");
+            setFullText("");
+          } catch (error) {
+            console.error("Error saving message:", error);
+          }
+        };
 
-      saveMessage();
+        saveMessage();
+      }
     }
-  }, [isTyping, typingText, fullText, conversationId, user]);
+  }, [isTyping, fullText, conversationId, user, chatMessages]);
 
   const loadMessages = async () => {
     if (!conversationId) return;
