@@ -204,12 +204,30 @@ export function SettingsModal({ isOpen, onOpenChange }: SettingsModalProps) {
 
             {/* Section 3: Dark Mode */}
             <div className="animate-fadeIn" style={{ animationDelay: "0.15s" }}>
-              <h3 className="text-xs font-semibold text-foreground/80 uppercase tracking-wider mb-3">
+              <h3
+                className={`text-xs font-semibold uppercase tracking-wider mb-3 transition-colors duration-300 ${
+                  isDark
+                    ? "text-foreground/80"
+                    : "text-[#3F3F3F]/70"
+                }`}
+              >
                 Apparence
               </h3>
-              <div className="bg-white/[0.03] rounded-[10px] p-3.5 flex items-center justify-between shadow-sm">
+              <div
+                className={`rounded-[10px] p-3.5 flex items-center justify-between shadow-sm transition-all duration-300 ${
+                  isDark
+                    ? "bg-white/[0.03]"
+                    : "bg-[#FFFFFF] border border-black/[0.08]"
+                }`}
+              >
                 <div>
-                  <p className="text-sm font-medium text-foreground">
+                  <p
+                    className={`text-sm font-medium transition-colors duration-300 ${
+                      isDark
+                        ? "text-foreground"
+                        : "text-[#1A1A1A]"
+                    }`}
+                  >
                     Mode sombre
                   </p>
                 </div>
@@ -218,12 +236,14 @@ export function SettingsModal({ isOpen, onOpenChange }: SettingsModalProps) {
                 <button
                   onClick={handleDarkModeToggle}
                   className={`relative w-12 h-7 rounded-full transition-all duration-300 flex items-center ${
-                    isDark ? "bg-primary/40" : "bg-white/[0.1]"
+                    isDark ? "bg-primary/40" : "bg-primary/20"
                   }`}
                 >
                   <div
-                    className={`absolute w-6 h-6 rounded-full bg-white shadow-md transition-all duration-300 flex items-center justify-center ${
-                      isDark ? "translate-x-5" : "translate-x-0.5"
+                    className={`absolute w-6 h-6 rounded-full shadow-md transition-all duration-300 flex items-center justify-center ${
+                      isDark
+                        ? "bg-white translate-x-5"
+                        : "bg-white translate-x-0.5"
                     }`}
                   >
                     {isDark ? (
