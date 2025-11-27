@@ -158,7 +158,7 @@ export function ProfilePhotoUpload({
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading || loading}
-            className="w-full px-4 py-2.5 rounded-lg border border-white/20 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 font-medium text-sm"
+            className="w-full px-3 py-2 rounded-[10px] border border-white/[0.1] hover:border-white/[0.2] bg-white/[0.03] hover:bg-white/[0.06] text-foreground/80 hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 font-medium text-xs"
           >
             {uploading ? (
               <>
