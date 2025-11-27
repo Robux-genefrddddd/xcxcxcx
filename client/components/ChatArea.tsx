@@ -197,6 +197,10 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
         clearTimeout(typingIntervalRef.current);
         typingIntervalRef.current = null;
       }
+      if (blockIntervalRef.current) {
+        clearTimeout(blockIntervalRef.current);
+        blockIntervalRef.current = null;
+      }
     };
   }, []);
 
@@ -206,9 +210,16 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
       clearTimeout(typingIntervalRef.current);
       typingIntervalRef.current = null;
     }
+    if (blockIntervalRef.current) {
+      clearTimeout(blockIntervalRef.current);
+      blockIntervalRef.current = null;
+    }
     setIsTyping(false);
     setTypingText("");
     setFullText("");
+    setBlocks([]);
+    setRenderedBlockCount(0);
+    setIsRenderingBlocks(false);
   }, [conversationId]);
 
   useEffect(() => {
