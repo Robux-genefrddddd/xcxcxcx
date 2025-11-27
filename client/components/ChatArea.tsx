@@ -58,6 +58,7 @@ interface ChatAreaProps {
 
 export function ChatArea({ conversationId }: ChatAreaProps) {
   const { user, userData } = useAuth();
+  const { isDark } = useTheme();
   const [message, setMessage] = useState("");
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
