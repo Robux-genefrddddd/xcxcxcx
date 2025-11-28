@@ -10,6 +10,11 @@ export function validateContentType(
   res: Response,
   next: NextFunction,
 ) {
+  // Skip validation for GET, DELETE, and HEAD requests (no body)
+  if (req.method === "GET" || req.method === "DELETE" || req.method === "HEAD") {
+    return next();
+  }
+
   const contentType = req.get("content-type");
 
   // Allow JSON requests
