@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { auth } from "@/lib/firebase";
 import { toast } from "sonner";
 import { Loader2, Plus, Copy, X, Check, AlertCircle } from "lucide-react";
@@ -16,6 +16,7 @@ export default function AdminLicensesSection() {
   const [licenses, setLicenses] = useState<License[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const [showGenerateModal, setShowGenerateModal] = useState(false);
   const [generatingLicense, setGeneratingLicense] = useState(false);
   const [planToGenerate, setPlanToGenerate] = useState<
