@@ -265,6 +265,13 @@ export const handleUpdateAIConfig: RequestHandler = async (req, res) => {
     }
 
     const db = getAdminDb();
+
+    if (!db) {
+      return res.status(503).json({
+        error: "Service temporarily unavailable. Firebase not initialized.",
+      });
+    }
+
     const userDoc = await db.collection("users").doc(decoded.uid).get();
 
     if (!userDoc.exists || !userDoc.data()?.isAdmin) {
