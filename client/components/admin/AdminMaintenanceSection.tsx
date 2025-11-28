@@ -264,6 +264,52 @@ export default function AdminMaintenanceSection() {
         </p>
       </div>
 
+      {maintenanceStatus && (maintenanceStatus.global || maintenanceStatus.partial) && (
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4">
+          <div className="flex items-start gap-3">
+            <AlertTriangle size={20} className="text-red-400 mt-0.5" />
+            <div className="flex-1">
+              <p className="text-sm font-medium text-red-300">
+                {maintenanceStatus.global ? "Maintenance globale active" : "Maintenance partielle active"}
+              </p>
+              <p className="text-sm text-red-300/70 mt-1">
+                {maintenanceStatus.message}
+              </p>
+              <button
+                onClick={() => handleDisableMaintenance(maintenanceStatus.global ? "global" : "partial")}
+                disabled={loading !== null}
+                className="text-xs text-red-300/70 hover:text-red-300 mt-2 underline"
+              >
+                Désactiver maintenant
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="rounded-lg border border-white/5 bg-white/[0.02] p-6">
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <h3 className="font-medium text-white flex items-center gap-2">
+              <Power size={18} />
+              Gestion de la maintenance
+            </h3>
+            <p className="text-sm text-foreground/60 mt-1">
+              Activer ou désactiver le mode maintenance
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setShowMaintenanceModal(true)}
+          disabled={loading !== null || fetchingStatus}
+          className="w-full px-4 py-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {fetchingStatus && <Loader2 size={16} className="animate-spin" />}
+          Gérer la maintenance
+        </button>
+      </div>
+
       {lastAction && (
         <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4">
           <div className="flex items-start gap-3">
