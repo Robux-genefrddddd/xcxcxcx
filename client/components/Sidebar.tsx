@@ -296,16 +296,16 @@ export function Sidebar({
                       : "bg-[#FAFAFA] border-black/[0.08]"
                   }`}
                 >
-                  <div className="space-y-0.5">
+                  <div className="space-y-1">
                     <button
                       onClick={() => {
                         setIsSettingsOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-all hover:-translate-y-0.5 ${
+                      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                         isDark
-                          ? "text-foreground/70 hover:text-foreground hover:bg-white/[0.08]"
-                          : "text-[#3F3F3F]/70 hover:text-[#1A1A1A] hover:bg-black/[0.08]"
+                          ? "text-foreground/80 hover:text-foreground hover:bg-white/[0.12]"
+                          : "text-[#3F3F3F]/80 hover:text-[#1A1A1A] hover:bg-black/[0.08]"
                       }`}
                     >
                       Paramètres
@@ -315,10 +315,10 @@ export function Sidebar({
                         setIsHelpOpen(true);
                         setIsMenuOpen(false);
                       }}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-all hover:-translate-y-0.5 ${
+                      className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                         isDark
-                          ? "text-foreground/70 hover:text-foreground hover:bg-white/[0.08]"
-                          : "text-[#3F3F3F]/70 hover:text-[#1A1A1A] hover:bg-black/[0.08]"
+                          ? "text-foreground/80 hover:text-foreground hover:bg-white/[0.12]"
+                          : "text-[#3F3F3F]/80 hover:text-[#1A1A1A] hover:bg-black/[0.08]"
                       }`}
                     >
                       Aide
@@ -335,13 +335,13 @@ export function Sidebar({
                             navigate("/admin");
                             setIsMenuOpen(false);
                           }}
-                          className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium transition-all hover:-translate-y-0.5 text-primary ${
+                          className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 text-primary ${
                             isDark
-                              ? "hover:bg-white/[0.08]"
-                              : "hover:bg-black/[0.08]"
+                              ? "hover:bg-primary/[0.15]"
+                              : "hover:bg-primary/[0.1]"
                           }`}
                         >
-                          Admin
+                          Admin Panel
                         </button>
                       </>
                     )}
