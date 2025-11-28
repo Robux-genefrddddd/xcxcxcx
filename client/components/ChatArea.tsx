@@ -444,7 +444,7 @@ export function ChatArea({ conversationId }: ChatAreaProps) {
       id="chat-area"
       className="flex-1 flex flex-col min-h-0 transition-colors duration-300"
       style={{
-        backgroundColor: isDark ? "#0e0e0e" : "#F3F4F6",
+        backgroundColor: isDark ? "transparent" : "#F3F4F6",
       }}
     >
       {/* Main Content Area - Messages Container */}
