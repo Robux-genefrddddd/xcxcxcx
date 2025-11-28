@@ -27,15 +27,23 @@ export default function AdminUsersSection() {
   const [expandedUser, setExpandedUser] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const isLoadingRef = useRef(false);
 
   useEffect(() => {
+    // Prevent duplicate requests in strict mode
+    if (isLoadingRef.current) return;
+
     const controller = new AbortController();
     abortControllerRef.current = controller;
+    isLoadingRef.current = true;
 
-    loadUsers(controller.signal);
+    loadUsers(controller.signal).finally(() => {
+      isLoadingRef.current = false;
+    });
 
     return () => {
       controller.abort();
+      isLoadingRef.current = false;
     };
   }, []);
 
