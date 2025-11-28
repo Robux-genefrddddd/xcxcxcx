@@ -4,10 +4,6 @@ import {
   doc,
   getDoc,
   updateDoc,
-  collection,
-  query,
-  where,
-  onSnapshot,
 } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 import {
