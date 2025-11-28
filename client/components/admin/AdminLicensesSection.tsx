@@ -126,6 +126,47 @@ export default function AdminLicensesSection() {
     setTimeout(() => setCopiedKey(null), 2000);
   };
 
+  const deleteLicense = async (key: string) => {
+    try {
+      setDeletingKey(key);
+      const currentUser = auth.currentUser;
+      if (!currentUser) throw new Error("Non authentifié");
+
+      const idToken = await currentUser.getIdToken();
+      const response = await fetch("/api/admin/delete-license", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ licenseKey: key }),
+      });
+
+      if (!response.ok) {
+        let errorMessage = "Erreur lors de la suppression";
+        try {
+          const errorData = await response.json();
+          errorMessage =
+            errorData.message || errorData.error || errorMessage;
+        } catch {
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
+      }
+
+      setLicenses((prev) => prev.filter((l) => l.key !== key));
+      toast.success("Licence supprimée avec succès");
+      setDeleteConfirm(null);
+    } catch (error) {
+      const errorMsg =
+        error instanceof Error ? error.message : "Erreur de suppression";
+      toast.error(errorMsg);
+      console.error("Error deleting license:", error);
+    } finally {
+      setDeletingKey(null);
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
