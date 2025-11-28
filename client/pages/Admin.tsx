@@ -67,7 +67,7 @@ export default function Admin() {
             {/* Header Content */}
             <div>
                   <h1 className="text-[28px] font-bold text-white">Panneau Admin</h1>
-              <p className="text-14px text-white/60 ml-13">
+              <p className="text-14px text-white/60 mt-1">
                 Gestion et monitoring du système
               </p>
             </div>
