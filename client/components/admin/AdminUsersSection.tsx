@@ -223,7 +223,11 @@ export default function AdminUsersSection() {
             <div>
               <p className="text-sm font-medium text-red-300">{error}</p>
               <button
-                onClick={loadUsers}
+                onClick={() => {
+                  const controller = new AbortController();
+                  abortControllerRef.current = controller;
+                  loadUsers(controller.signal);
+                }}
                 className="text-xs text-red-300/70 hover:text-red-300 mt-2 underline"
               >
                 Réessayer
