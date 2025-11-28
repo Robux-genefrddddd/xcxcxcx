@@ -85,17 +85,6 @@ export default function Index() {
     );
   }
 
-  // Show disclaimer modal if not accepted
-  if (!disclaimerAccepted) {
-    return (
-      <DisclaimerModal
-        isOpen={true}
-        onAccept={handleDisclaimerAccept}
-        onDecline={handleDisclaimerDecline}
-      />
-    );
-  }
-
   // Show maintenance modal (critical = non-dismissible and blocks app)
   if (maintenanceNotice) {
     return (
