@@ -110,7 +110,7 @@ function AppRoutes() {
   }, [navigate, userData?.isAdmin]);
 
   return (
-    <MaintenanceWrapper>
+    <MaintenanceCheckWrapper>
       <TOSModal
         isOpen={showTOS}
         onAccept={() => {
@@ -121,31 +121,36 @@ function AppRoutes() {
           toast.info("Vous devez accepter les conditions pour continuer");
         }}
       />
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <>
-              <AuthPages />
-              <Login />
-            </>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <>
-              <AuthPages />
-              <Register />
-            </>
-          }
-        />
-        <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
-        <Route path="/" element={<ProtectedRoute element={<Index />} />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </MaintenanceWrapper>
+      <div className="min-h-screen flex flex-col">
+        <MaintenanceBanner />
+        <div className="flex-1">
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <>
+                  <AuthPages />
+                  <Login />
+                </>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <>
+                  <AuthPages />
+                  <Register />
+                </>
+              }
+            />
+            <Route path="/admin" element={<AdminRoute element={<Admin />} />} />
+            <Route path="/" element={<ProtectedRoute element={<Index />} />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </div>
+    </MaintenanceCheckWrapper>
   );
 }
 
