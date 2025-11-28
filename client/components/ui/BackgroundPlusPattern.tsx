@@ -17,14 +17,6 @@ export function BackgroundPlusPattern() {
         backgroundAttachment: 'fixed, fixed',
       }}
     >
-      {/* Subtle vignette effect for premium depth */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.08) 100%)',
-          pointerEvents: 'none',
-        }}
-      />
 
       {/* Ultra-subtle noise/grain texture layer */}
       <div
