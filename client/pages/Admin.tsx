@@ -40,14 +40,8 @@ export default function Admin() {
     );
   }
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/login", { replace: true });
-    } catch (error) {
-      toast.error("Erreur lors de la déconnexion");
-      console.error("Logout error:", error);
-    }
+  const handleLogout = () => {
+    navigate("/");
   };
 
   const tabs = [
