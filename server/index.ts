@@ -12,17 +12,19 @@ import {
 } from "./routes/ai";
 import {
   handleVerifyAdmin,
-  handleBanUser,
   handleGetAllUsers,
-  handleCreateLicense,
-  handleBanIP,
-  handleDeleteUser,
   handlePromoteUser,
   handleDemoteUser,
-  handleResetMessages,
+  handleBanUser,
   handleUnbanUser,
+  handleResetMessages,
+  handleDeleteUser,
   handleGetLicenses,
+  handleCreateLicense,
+  handleGetAIConfig,
+  handleUpdateAIConfig,
   handleGetSystemStats,
+  handlePurgeLicenses,
 } from "./routes/admin";
 import {
   handleCheckIPBan,
