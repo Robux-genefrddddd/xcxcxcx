@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { Users, LogOut, Key, Brain, BarChart3, Settings } from "lucide-react";
-import { toast } from "sonner";
 import AdminUsersSection from "@/components/admin/AdminUsersSection";
 import AdminLicensesSection from "@/components/admin/AdminLicensesSection";
 import AdminAIConfigSection from "@/components/admin/AdminAIConfigSection";
