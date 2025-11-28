@@ -94,19 +94,17 @@ export default function AdminAIConfigSection() {
           <label className="block text-sm font-medium text-white mb-2">
             Modèle
           </label>
-          <select
+          <input
+            type="text"
             value={tempConfig.model}
             onChange={(e) =>
               setTempConfig({ ...tempConfig, model: e.target.value })
             }
-            className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white hover:border-white/20 transition-colors focus:outline-none focus:border-white/30"
-          >
-            <option value="gpt-4">GPT-4</option>
-            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-            <option value="gpt-4-turbo">GPT-4 Turbo</option>
-          </select>
+            placeholder="ex: gpt-4o-mini, claude-3-5-sonnet, etc."
+            className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder:text-foreground/40 hover:border-white/20 transition-colors focus:outline-none focus:border-white/30"
+          />
           <p className="text-xs text-foreground/60 mt-2">
-            Sélectionnez le modèle d'IA à utiliser pour les requêtes
+            Entrez le nom du modèle d'IA à utiliser
           </p>
         </div>
 
