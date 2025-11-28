@@ -134,8 +134,14 @@ export function createServer() {
   apiRouter.post("/admin/ban-user", adminRateLimit, handleBanUser);
   apiRouter.post("/admin/ban-ip", adminRateLimit, handleBanIP);
   apiRouter.post("/admin/delete-user", adminRateLimit, handleDeleteUser);
+  apiRouter.post("/admin/promote-user", adminRateLimit, handlePromoteUser);
+  apiRouter.post("/admin/demote-user", adminRateLimit, handleDemoteUser);
+  apiRouter.post("/admin/reset-messages", adminRateLimit, handleResetMessages);
+  apiRouter.post("/admin/unban-user", adminRateLimit, handleUnbanUser);
   apiRouter.get("/admin/users", adminRateLimit, handleGetAllUsers);
+  apiRouter.get("/admin/licenses", adminRateLimit, handleGetLicenses);
   apiRouter.post("/admin/create-license", adminRateLimit, handleCreateLicense);
+  apiRouter.get("/admin/system-stats", adminRateLimit, handleGetSystemStats);
 
   // Mount API router
   app.use("/api", apiRouter);
