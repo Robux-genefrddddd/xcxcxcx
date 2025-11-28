@@ -133,35 +133,6 @@ export function Sidebar({
     }
   };
 
-  export function updateConversationTitle(
-    conversationId: string,
-    newTitle: string,
-  ) {
-    setConversations((prev) =>
-      prev.map((conv) => {
-        if (conv.id === conversationId) {
-          return {
-            ...conv,
-            name: newTitle,
-            isTemporary: false,
-            titleJustUpdated: true,
-          };
-        }
-        return conv;
-      }),
-    );
-    // Reset animation flag after animation completes
-    setTimeout(() => {
-      setConversations((prev) =>
-        prev.map((conv) =>
-          conv.id === conversationId
-            ? { ...conv, titleJustUpdated: false }
-            : conv,
-        ),
-      );
-    }, 150);
-  }
-
   const handleLogout = async () => {
     try {
       await signOut(auth);
